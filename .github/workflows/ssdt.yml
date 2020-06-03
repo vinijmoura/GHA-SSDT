@@ -43,11 +43,7 @@ jobs:
       uses: Azure/login@v1.1
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
-    
-    - name: DIR
-      run: |
-        dir .
-        
+           
     - name: Azure SQL Deploy
       uses: Azure/sql-action@v1
       with:
