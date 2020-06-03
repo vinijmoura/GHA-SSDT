@@ -38,5 +38,5 @@ jobs:
     
     # Create the app package by building and packaging the Windows Application Packaging project
     - name: Run Msbuild
-      run: msbuild /env:Solution_Name /p:platform=$env:buildPlatform /p:Configuration=$env:buildConfiguration
+      run: msbuild $env:Solution_Name /p:platform=$env:buildPlatform /p:Configuration=$env:buildConfiguration
 
