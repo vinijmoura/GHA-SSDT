@@ -42,12 +42,12 @@ jobs:
           
     - name: Azure Login
       uses: Azure/login@v1.1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
           
     - name: Azure SQL Deploy
       uses: Azure/sql-action@v1
-        with:
-          server-name: ${{ secrets.SQL_SERVERNAME }}
-          connection-string: ${{ secrets.AZURE_SQL_CONNECTION_STRING }}
-          dacpac-package: ./bin/$env:buildConfiguration/GHA-SSDT.dacpac
+      with:
+        server-name: ${{ secrets.SQL_SERVERNAME }}
+        connection-string: ${{ secrets.AZURE_SQL_CONNECTION_STRING }}
+        dacpac-package: ./bin/$env:buildConfiguration/GHA-SSDT.dacpac
