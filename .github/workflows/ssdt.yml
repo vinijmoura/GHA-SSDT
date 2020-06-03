@@ -39,4 +39,15 @@ jobs:
     # Create the app package by building and packaging the Windows Application Packaging project
     - name: Run Msbuild
       run: msbuild $env:Solution_Name /p:platform=$env:buildPlatform /p:Configuration=$env:buildConfiguration
-
+          
+    - name: Azure Login
+      uses: Azure/login@v1.1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          
+    - name: Azure SQL Deploy
+      uses: Azure/sql-action@v1
+        with:
+          server-name: ${{ secrets.SQL_SERVERNAME }}
+          connection-string: ${{ secrets.AZURE_SQL_CONNECTION_STRING }}
+          dacpac-package: ./bin/$env:buildConfiguration/GHA-SSDT.dacpac
