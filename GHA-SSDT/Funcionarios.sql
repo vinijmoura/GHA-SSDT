@@ -4,5 +4,6 @@
     [Nome] VARCHAR(50) NOT NULL, 
     [NumeroCracha] NCHAR(10) NOT NULL, 
     [Endereco] VARCHAR(50) NULL, 
-    [Telefone] VARCHAR(50) NULL
+    [Telefone] VARCHAR(50) NULL, 
+    [CPF] VARCHAR(11) NULL
 )
