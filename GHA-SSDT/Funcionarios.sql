@@ -5,5 +5,6 @@
     [NumeroCracha] NCHAR(10) NOT NULL, 
     [Endereco] VARCHAR(50) NULL, 
     [Telefone] VARCHAR(50) NULL, 
-    [CPF] VARCHAR(11) NULL
+    [CPF] VARCHAR(11) NULL, 
+    [RG] VARCHAR(10) NULL
 )
