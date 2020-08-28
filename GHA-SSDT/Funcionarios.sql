@@ -6,5 +6,6 @@
     [Endereco] VARCHAR(50) NULL, 
     [Telefone] VARCHAR(50) NULL, 
     [CPF] VARCHAR(11) NULL, 
-    [RG] VARCHAR(10) NULL
+    [RG] VARCHAR(10) NULL, 
+    [Celular] VARCHAR(12) NULL
 )
