@@ -5,11 +5,6 @@ on:
   pull_request:
     branches: [ master ]
 
-env:
-      Solution_Name: 'GHA-SSDT.sln'                      
-      buildPlatform: 'Any CPU'
-      buildConfiguration: 'Release'
-
 jobs:
 
   build:
@@ -21,7 +16,15 @@ jobs:
       uses: actions/checkout@v2
       with:
         fetch-depth: 0
-        
+    
+    - name: Create env file
+      run: |
+        touch .env
+        echo Solution_Name="GHA-SSDT.sln" >> .env
+        echo buildPlatform="Any CPU" >> .env
+        echo buildConfiguration="Release" >> .env
+        cat .env
+    
     - name: Setup NuGet.exe for use with actions
       uses: NuGet/setup-nuget@v1.0.2
       with:
