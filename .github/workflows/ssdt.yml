@@ -25,6 +25,11 @@ jobs:
         echo buildConfiguration="Release" >> .env
         cat .env
     
+    - name: Dotenv Action
+      uses: falti/dotenv-action@v0.2.5
+      with:
+        path: .env
+    
     - name: Setup NuGet.exe for use with actions
       uses: NuGet/setup-nuget@v1.0.2
       with:
@@ -35,6 +40,7 @@ jobs:
       uses: microsoft/setup-msbuild@2008f912f56e61277eefaac6d1888b750582aa16
 
     # Restore the application to populate the obj folder with RuntimeIdentifiers
+
     - name: Nuget Restore the application
       run: msbuild $Solution_Name /t:Restore /p:platform=$buildPlatform /p:Configuration=$buildConfiguration
     
