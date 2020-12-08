@@ -37,12 +37,9 @@ jobs:
     - name: Setup NuGet.exe for use with actions
       uses: NuGet/setup-nuget@v1.0.5
  
-    # Add  MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
-    - name: Setup MSBuild.exe
-      uses: microsoft/setup-msbuild@2008f912f56e61277eefaac6d1888b750582aa16
-
-    # Restore the application to populate the obj folder with RuntimeIdentifiers
-
+    - name: setup-msbuild
+      uses: microsoft/setup-msbuild@v1.0.2
+    
     - name: Nuget Restore the application
       run: msbuild ${{ env.Solution_Name }} /t:Restore /p:platform=${{ env.buildPlatform }} /p:Configuration=${{ env.buildConfiguration }}
     
