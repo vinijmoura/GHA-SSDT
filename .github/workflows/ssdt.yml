@@ -1,7 +1,7 @@
 name: SQL Server Database Project
 
 env:
-  Solution_Name: "GHA-SSDT.sln"
+  Proj_Name: "GHA-SSDT.sln"
   BuildPlatform: "Any CPU"
   buildConfiguration: "Release"
     
@@ -19,7 +19,7 @@ jobs:
     - name: Create env file
       run: |
         touch .env
-        echo Solution_Name="GHA-SSDT.sln" >> .env
+        echo Proj_Name="./GHA-SSDT/GHA-SSDT.sqlproj" >> .env
         echo buildPlatform="Any CPU" >> .env
         echo buildConfiguration="Release" >> .env
         cat .env
@@ -41,11 +41,11 @@ jobs:
       uses: microsoft/setup-msbuild@v1.0.2
     
     - name: Nuget Restore the application
-      run: msbuild ${{ env.Solution_Name }} /t:Restore /p:platform=${{ env.buildPlatform }} /p:Configuration=${{ env.buildConfiguration }}
+      run: msbuild ${{ env.Proj_Name }} /t:Restore /p:platform=${{ env.buildPlatform }} /p:Configuration=${{ env.buildConfiguration }}
     
     # Create the app package by building and packaging the Windows Application Packaging project
     - name: Run Msbuild
-      run: msbuild ${{ env.Solution_Name }} /p:platform=${{ env.buildPlatform }} /p:Configuration=${{ env.buildConfiguration }}
+      run: msbuild ${{ env.Proj_Name }} /p:platform=${{ env.buildPlatform }} /p:Configuration=${{ env.buildConfiguration }}
 
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v2.2.1
