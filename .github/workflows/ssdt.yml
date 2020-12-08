@@ -7,16 +7,9 @@ on:
 
 jobs:
 
-  build:
-
-    runs-on: windows-latest 
-    
+  env:
+    runs-on: windows-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
-    
     - name: Create env file
       run: |
         touch .env
@@ -24,12 +17,17 @@ jobs:
         echo buildPlatform="Any CPU" >> .env
         echo buildConfiguration="Release" >> .env
         cat .env
+          
+  build:
+    needs: env
+    runs-on: windows-latest 
     
-    - name: Dotenv Action
-      uses: falti/dotenv-action@v0.2.5
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
       with:
-        path: .env
-    
+        fetch-depth: 0
+  
     - name: Setup NuGet.exe for use with actions
       uses: NuGet/setup-nuget@v1.0.2
       with:
@@ -42,7 +40,7 @@ jobs:
     # Restore the application to populate the obj folder with RuntimeIdentifiers
 
     - name: Nuget Restore the application
-      run: msbuild $Solution_Name /t:Restore /p:platform=$buildPlatform /p:Configuration=$buildConfiguration
+      run: msbuild ${{ needs.env.Solution_Name }} /t:Restore /p:platform=${{ needs.env.buildPlatform }} /p:Configuration=${{ needs.env.buildConfiguration }}
     
     # Create the app package by building and packaging the Windows Application Packaging project
     - name: Run Msbuild
