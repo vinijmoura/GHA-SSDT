@@ -39,8 +39,14 @@ jobs:
 
     # Restore the application to populate the obj folder with RuntimeIdentifiers
 
+    - name: Dotenv Action
+      uses: falti/dotenv-action@v0.2.5
+      with:
+        # the path to the .env file (including file name)
+        path: .env
+
     - name: Nuget Restore the application
-      run: msbuild ${Solution_Name} /t:Restore /p:platform=${buildPlatform} /p:Configuration=${buildConfiguration}
+      run: msbuild ${{ steps.dotenv.outputs.Solution_Name }} /t:Restore /p:platform=${{ steps.dotenv.outputs.buildPlatform }} /p:Configuration=${{ steps.dotenv.outputs.buildConfiguration }}
     
     # Create the app package by building and packaging the Windows Application Packaging project
     - name: Run Msbuild
