@@ -8,6 +8,7 @@
     [RG]             VARCHAR (10) NULL,
     [Celular]        VARCHAR (12) NULL,
     [numeroendereco] VARCHAR (8)  NULL,
+    [ComplmentoEndereco] VARCHAR (30) NULL
     PRIMARY KEY CLUSTERED ([Id] ASC)
 );
 
